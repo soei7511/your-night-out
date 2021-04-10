@@ -49,6 +49,8 @@ Pg-Promise   - A database tool to help use connect to our PostgreSQL database
    */
   const isProduction = process.env.NODE_ENV === 'production';
   const dbConfig = isProduction ? process.env.DATABASE_URL : dev_dbConfig;
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
 
   // Heroku Postgres patch for v10
   // fixes: https://github.com/vitaly-t/pg-promise/issues/711
