@@ -114,10 +114,21 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
   });
 
   app.get('/food-preferences', (req, res) => {
-      res.render('pages/food-preferences', {
-          my_title: 'Cuisine Preferences',
-          error: false
-      });
+    var ipAddr = req.headers["x-forwarded-for"];
+    if (ipAddr){
+        var list = ipAddr.split(",");
+        ipAddr = list[list.length-1];
+    } else {
+        ipAddr = req.connection.remoteAddress;
+    }
+    console.log(ipAddr);
+    console.log(userIp);
+    res.render('pages/food-preferences', {
+        my_title: 'Cuisine Preferences',
+        ipFromAPI: userIp,
+        ipFromGET: ipAddr,
+        error: false
+    });
   });
 
   app.get('/logout', (req, res) => {
@@ -351,6 +362,8 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
                     res.render('pages/food-preferences', {
                         my_title: "Cuisine Preferences",
                         error: true,
+                        ipFromAPI: userIp,
+                        ipFromGET: ipAddr,
                         message: "Error: No restaurants found with the parameters you specified"
                     });
                 }
