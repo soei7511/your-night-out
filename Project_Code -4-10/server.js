@@ -113,7 +113,7 @@ app.get('/login', checkAuthenticated, (req, res) => {
     res.render("pages/login");
 });
 
-app.get('/food-preferences', (req, res) => {
+app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
   // fix from: https://lostechies.com/derickbailey/2013/12/04/getting-the-real-client-ip-address-on-a-heroku-hosted-nodejs-app/
   var ipAddr = req.headers["x-forwarded-for"]; // if used on heroku, this grabs users ip from heroku ip forwarding
   if (ipAddr){
@@ -125,6 +125,7 @@ app.get('/food-preferences', (req, res) => {
       my_title: 'Cuisine Preferences',
       error: false
   });
+  user_email = req.user.email;
 });
 
 app.get('/logout', (req, res) => {
@@ -238,6 +239,13 @@ app.post('/restaurants', function(req, res){
               for (let i = 0; i < keysArr.length; i++){
                   cuisineArr[i] = keysArr[i];
                   //console.log("cuis: " + cuisineArr[i]);
+                pool.query(
+                        `UPDATE user_info
+                         SET restaurant_preferences = $1
+                         WHERE email = $2`, [cuisineArr, user_email], (err, results) => {
+                              if (err) {}
+                         }
+                     );
               }
           }
           axios({ // This API returns restaurant data from google
