@@ -1,214 +1,219 @@
 <%- include('../partials/header2.ejs'); -%>
 <body id="body">
+    <style>
+      body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .background {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("https://t3.ftcdn.net/jpg/02/52/12/40/360_F_252124067_aCtp9ZD934RboKmjJzkXiwYDL7XkNjpn.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow: hidden;
+      }
+      .shade {
+      top: 0;
+      left: 0;
+      width:100%;
+      height:100%;
+      position: absolute;
+      background:rgba(0, 0, 0, 0.7);
+      }
+      .myDiv h1 {
+      color:#fff;
+      font-size:50px;
+      font-weight: 600;
+      position: relative;
+      text-align: center;
+      }
+      .myDiv h3 {
+      color: white;
+      font-size:22px;
+      font-weight: 300;
+      margin: 10px;
+      position: relative;
+      text-align: center;
+      }
+      .card {
+      cursor: pointer;
+      margin:30px;
+      border-width: none;
+      }
+      .card-img {
+      height:100%;
+      width:100%;
+      background-size: cover;
+      }
+      .carousel-indicators {
+      bottom: -50px;
+      }
+      .carousel-control-prev, .carousel-control-next {
+      width: 5%;
+      }
+      .card-title {
+      background:white;
+      border: 5px solid white;
+      border-radius: 5px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 900;
+      color: black;
+      text-transform: uppercase;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 2rem;
+      transform: translate(-50%, -50%);
+      }
+      .card:hover {
+      transform: scale(1.05);
+      /* border-color: rgb(1, 12, 36);
+      border-width: 5px; */
+      }
+    </style>
+    
+<div class="background">
+            <div class="shade"></div>
+            <div class="myDiv">
+                <h1>Food preferences</h1>
+                <h3>Please select at least three options to generate restaurants near by.</h3>
 
-<style>
-	body {
-	 width: 100vw;
-	 height: 100vh;
-	 display: flex;
-	 align-items: center;
-	 justify-content: center;
-	}
-
-	.background {
-			width: 100vw;
-	 height: 100vh;
-	 display: flex;
-	 align-items: center;
-	 justify-content: center;
-			background-image: url("https://t3.ftcdn.net/jpg/02/52/12/40/360_F_252124067_aCtp9ZD934RboKmjJzkXiwYDL7XkNjpn.jpg");
-			background-repeat: no-repeat;
-			background-size: cover;
-			overflow: hidden;
-	}
-
-	.shade {
-top: 0;
-left: 0;
-width:100%;
-height:100%;
-position: absolute;
-background:rgba(0, 0, 0, 0.7);
-}
-
-	.myDiv h1 {
-			color:#fff;
-font-size:50px;
-font-weight: 600;
-position: relative;
-			text-align: center;
-	}
-
-	.myDiv h3 {
-			color: white;
-font-size:22px;
-font-weight: 300;
-margin: 10px;
-position: relative;
-			text-align: center;
-	}
-
-	.card {
-			cursor: pointer;
-			margin:30px;
-			border-width: none;
-	}
-
-	.card-img {
-			height:100%;
-			width:100%;
-			background-size: cover;
-	}
-
-	.carousel-indicators {
-			bottom: -50px;
-	}
-
-	.carousel-control-prev, .carousel-control-next {
-			width: 5%;
-	}
-
-	.card-title {
-			background:white;
-			border: 5px solid white;
-			border-radius: 5px;
-			font-family: 'Roboto', sans-serif;
-			font-weight: 900;
-			color: black;
-			text-transform: uppercase;
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			font-size: 2rem;
-			transform: translate(-50%, -50%);
-	}
-	.card:hover {
-			transform: scale(1.05);
-			/* border-color: rgb(1, 12, 36);
-			border-width: 5px; */
-	}
-</style>
-
-	<div class="container">
-		<br>
-		<br>
-		<div class="row">
-			<div class="col-8">
-				<div>
-				  <h1 class="display-4">Your Night Out</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <section id="container">
-        <div id="choose" class="background">
-					<div class="shade"></div>
-            <h1> Choose Your Food Preference</h1>
-						<h3>Please select at least three options to generate restaurants near by.</h3>
-            <br>
-						<div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
-							<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							</ol>
-
-                <form name="form1" action="/restaurants/" method="POST">
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<div class="card-group">
-								<!-- <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="chinese">Chinese Cuisine</label>
-                </div> -->
-                <!-- <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="italian">Italian Cuisine</label>
+                <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
+                    <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <form method="post" action="<>">     
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="card-group">
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://hips.hearstapps.com/del.h-cdn.co/assets/15/29/1437173075-delish-takeout-healthier.jpg" alt="Chinese card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Chinese</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check">Select</label>
+                                        </div> 
+                                    </div>   
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGWkDH2gQ8S1ytHGB0CV6jRrJkEBMh_rvSNA&usqp=CAU" alt="Italian card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Italian</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check2">Select</label>
+                                        </div>  
+                                    </div>
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5XJ9hN2RV7UxnFI2EdnFjY3wQCLW-nWCbsA&usqp=CAU" alt="Mexican card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Mexican</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check3">Select</label>
+                                        </div>  
+                                    </div>
+                                </div>        
+                            </div>      
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card-group">
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://i.ndtvimg.com/i/2017-01/vegetarian-dinner-620_620x350_51484918976.jpg" alt="Veg card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Vegetarian</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check4" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check4">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJepQqVHKQt2xSRPmfmG-pO_mTu_AsINHQKg&usqp=CAU" alt="Indian card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Indian</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check5" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check5">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://jpninfo.com/wp-content/uploads/2018/03/sushi-platter.jpg" alt="Jap card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Japanese</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check6" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check6">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>      
+                            </div>      
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card-group">
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFRwMH76nLp4u5qFJdW3-3rCgNeOzPj5UTYg&usqp=CAU" alt="American card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">American</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check7" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check7">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTaZ0NzQSRk995LUVPu-tBajN8Ibcv18XvBw&usqp=CAU" alt="Breakfast card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Breakfast</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check8" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check8">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>    
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmQBuEbndq0L6eNkc1hJkOsuvv5DlCifa-IQ&usqp=CAU" alt="Thai card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Thai</h5>
+                                        <div class="card-footer text-center">
+                                            <input type="checkbox" class="btn-check" id="btn-check9" autocomplete="off" />
+                                            <label class="btn btn-primary" for="btn-check9">Select</label>
+                                        </div> 
+                                    </div>
+                                </div>      
+                            </div>      
+                        </div>
+                    </div>
+                    <input type="submit" class="Submit">
+                </form>    
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="mexican">Mexican Cuisine</label>
-                </div> -->
-
-								<div class="card border-secondary mb-3" style="max-width: 18rem;">
-										<img class="card-img" src="https://hips.hearstapps.com/del.h-cdn.co/assets/15/29/1437173075-delish-takeout-healthier.jpg" alt="Chinese card image">
-										<div class="card-img-overlay">
-												<h5 class="card-title">Chinese</h5>
-												<div class="card-footer text-center">
-													<label><input type="checkbox" name = "data" value="chinese" class="btn-check" id="btn-check" autocomplete="off">Chinese Cuisine</label>
-
-														<!-- <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" />
-														<label class="btn btn-primary" for="btn-check">Checkbox button</label> -->
-												</div>
-										</div>
-								</div>
-								<div class="card border-secondary mb-3" style="max-width: 18rem;">
-										<img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGWkDH2gQ8S1ytHGB0CV6jRrJkEBMh_rvSNA&usqp=CAU" alt="Italian card image">
-										<div class="card-img-overlay">
-												<h5 class="card-title">Italian</h5>
-												<div class="card-footer text-center">
-													<label><input type="checkbox" name = "data" value="italian" class="btn-check" id="btn-check2" autocomplete="off">Italian Cuisine</label>
-
-														<!-- <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" />
-														<label class="btn btn-primary" for="btn-check2">Checkbox button</label> -->
-												</div>
-										</div>
-								</div>
-								<div class="card border-secondary mb-3" style="max-width: 18rem;">
-										<img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5XJ9hN2RV7UxnFI2EdnFjY3wQCLW-nWCbsA&usqp=CAU" alt="Mexican card image">
-										<div class="card-img-overlay">
-												<h5 class="card-title">Mexican</h5>
-												<div class="card-footer text-center">
-													<label><input type="checkbox" name = "data" value="mexican"  class="btn-check" id="btn-check3" autocomplete="off">Mexican Cuisine</label>
-
-														<!-- <input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off" />
-														<label class="btn btn-primary" for="btn-check3">Checkbox button</label> -->
-												</div>
-										</div>
-								</div>
-							</div>
-
-							</div>
-
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="noodles">Noodles</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="indian">Indian Cuisine</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="japanese">Japanese Cuisine</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="american">American Cuisine</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="breakfast">Breakfast Food</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="thai">Thai Cuisine</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name = "data" value="vegetarian">Vegetarian Cuisine</label>
-                </div>
-							</div>
-
-                <input type="submit" value="Submit">
-            </form>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon"></span>
-								<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-								<span class="carousel-control-next-icon"></span>
-								<span class="sr-only">Next</span>
-						</a>
-
-					</div>
-
+            </div>       
             <% if (error) { %>
-                <div class="alert alert-danger"><%- message %></div>
-              <% } %>
+            <div class="alert alert-danger"><%- message %></div>
+            <% } %>
         </div>
     </section>
-
-<%- include('../partials/footer.ejs'); -%>
+    <%- include('../partials/footer.ejs'); -%>
