@@ -1,10 +1,8 @@
 <%- include('../partials/header.ejs'); -%>
-<%- include('../partials/nav.ejs'); -%>
-
 <style>
-  #body{
-      width: 100%;
-   height: 100%;
+  .background{
+      width: 100vw;
+   height: 100vh;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -14,8 +12,8 @@
       overflow: hidden;
   }
 </style>
-
 <body id="body">
+<%- include('../partials/nav.ejs'); -%>
     <!-- <div class="container">
         <br>
         <br>
@@ -28,9 +26,10 @@
         </div>
     </div> -->
     <div class="container rest">
-        <h2 style="color:white;">Step 2: Click On The Restaurant of Your Choice</h2>
+        <h2>Step 2: Click On The Restaurant of Your Choice</h2>
         <br>
         <form name="form2" action="/movie-preferences/" method="POST">
+          <div class="background">
         <%
             let cards = '<div class="card-columns">';
             <!-- Iterate the items object & update the cards variable -->
@@ -58,6 +57,7 @@
         <input type="text" style="visibility: hidden" name="rest_id" required/>
         <input type="submit" value="Continue to Movie Selection" style="width:100%; text-align:center;">
         <br>
+        </div>
         </form>
     </div>
     <script>
