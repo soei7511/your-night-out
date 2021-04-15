@@ -33,7 +33,3 @@
 .card.selected {
     border: 1.5px solid rgb(0,123,255);
 }
-
-.container.rest {
-    background-color: brown;
-}
