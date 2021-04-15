@@ -13,7 +13,7 @@
         body {
          width: 100vw;
          height: 100vh;
-         display: flex; 
+         display: flex;
          align-items: center;
          justify-content: center;
         }
@@ -21,7 +21,7 @@
         .background {
             width: 100vw;
          height: 100vh;
-         display: flex; 
+         display: flex;
          align-items: center;
          justify-content: center;
             background-image: url("https://t3.ftcdn.net/jpg/02/52/12/40/360_F_252124067_aCtp9ZD934RboKmjJzkXiwYDL7XkNjpn.jpg");
@@ -98,9 +98,14 @@
         }
 
         input[type="submit"] {width: 100%;}
-        input[type="submit"]:hover { 
+        input[type="submit"]:hover {
             background-color: #4CAF50;
             color: white;
+        }
+
+        input.checkbox {
+            width: 40px;
+            height: 40px;
         }
 
         /* input[type="checkbox"]:checked {
@@ -128,7 +133,7 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                     </ol>
-                    <form name="form1" action="/restaurants/" method="POST">    
+                    <form name="form1" action="/restaurants/" method="POST">
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -138,91 +143,128 @@
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Chinese</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="chinese">
-                                        </div> 
-                                    </div>   
-                                </div>    
+                                            <input  class="checkbox" type="checkbox" name="data" value="chinese">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGWkDH2gQ8S1ytHGB0CV6jRrJkEBMh_rvSNA&usqp=CAU" alt="Italian card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Italian</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="italian">
-                                        </div>  
+                                            <input  class="checkbox" type="checkbox" name="data" value="italian">
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5XJ9hN2RV7UxnFI2EdnFjY3wQCLW-nWCbsA&usqp=CAU" alt="Mexican card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Mexican</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="mexican">
-                                        </div>  
+                                            <input  class="checkbox" type="checkbox" name="data" value="mexican">
+                                        </div>
                                     </div>
-                                </div>        
-                            </div>      
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card-group">
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://i.ndtvimg.com/i/2017-01/vegetarian-dinner-620_620x350_51484918976.jpg" alt="Veg card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Vegetarian</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="vegetarian">
-                                        </div> 
+                                            <input class="checkbox" type="checkbox" name="data" value="vegetarian">
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJepQqVHKQt2xSRPmfmG-pO_mTu_AsINHQKg&usqp=CAU" alt="Indian card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Indian</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="indian">
-                                        </div> 
+                                            <input  class="checkbox" type="checkbox" name="data" value="indian">
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card-group">
+
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://jpninfo.com/wp-content/uploads/2018/03/sushi-platter.jpg" alt="Jap card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Japanese</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="japanese">
-                                        </div> 
+                                            <input class="checkbox" type="checkbox" name="data" value="japanese">
+                                        </div>
                                     </div>
-                                </div>      
-                            </div>      
+                                </div>
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFRwMH76nLp4u5qFJdW3-3rCgNeOzPj5UTYg&usqp=CAU" alt="American card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">American</h5>
+                                        <div class="card-footer text-center">
+                                            <input class="checkbox" type="checkbox" name="data" value="american">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTaZ0NzQSRk995LUVPu-tBajN8Ibcv18XvBw&usqp=CAU" alt="Breakfast card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Breakfast</h5>
+                                        <div class="card-footer text-center">
+                                            <input class="checkbox" type="checkbox" name="data" value="breakfast">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmQBuEbndq0L6eNkc1hJkOsuvv5DlCifa-IQ&usqp=CAU" alt="Thai card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Thai</h5>
+                                        <div class="card-footer text-center">
+                                            <input  class="checkbox" type="checkbox" name="data" value="thai">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                    <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM36WjoDRY4oEf2W8yHawIrIZwgmEKDKIlag&usqp=CAU" alt="Noodles card image">
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title">Noodles</h5>
+                                        <div class="card-footer text-center">
+                                            <input  class="checkbox" type="checkbox" name="data" value="noodles">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="carousel-item">
+                        <!-- <div class="carousel-item">
                             <div class="card-group">
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFRwMH76nLp4u5qFJdW3-3rCgNeOzPj5UTYg&usqp=CAU" alt="American card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">American</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="american">
-                                        </div> 
+                                            <input class="checkbox" type="checkbox" name="data" value="american">
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTaZ0NzQSRk995LUVPu-tBajN8Ibcv18XvBw&usqp=CAU" alt="Breakfast card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Breakfast</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="breakfast">
-                                        </div> 
+                                            <input class="checkbox" type="checkbox" name="data" value="breakfast">
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmQBuEbndq0L6eNkc1hJkOsuvv5DlCifa-IQ&usqp=CAU" alt="Thai card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Thai</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="thai">
-                                        </div> 
+                                            <input  class="checkbox" type="checkbox" name="data" value="thai">
+                                        </div>
                                     </div>
-                                </div>      
-                            </div>      
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <div class="card-group">
@@ -231,15 +273,15 @@
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Noodles</h5>
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="noodles">
-                                        </div> 
+                                            <input  class="checkbox" type="checkbox" name="data" value="noodles">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>      
-                        </div>          
+                            </div>
+                        </div> -->
                     </div>
                     <input type="submit" class="Submit">
-                </form>    
+                </form>
                     <!-- Left and right controls -->
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
@@ -250,7 +292,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-            </div>  
-        </div>      
+            </div>
+        </div>
     </body>
     </html>
