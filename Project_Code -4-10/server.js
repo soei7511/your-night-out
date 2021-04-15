@@ -100,7 +100,7 @@ app.get('/', checkAuthenticated, (req, res) => {
         }
       }
   );
-    res.render("pages/login");
+    res.render("pages/home");
 
 
 });
