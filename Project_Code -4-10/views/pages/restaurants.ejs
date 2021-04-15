@@ -1,4 +1,6 @@
 <%- include('../partials/header.ejs'); -%>
+<%- include('../partials/nav.ejs'); -%>
+
 <style>
   #body{
       width: 100%;
@@ -12,7 +14,6 @@
       overflow: hidden;
   }
 </style>
-<%- include('../partials/nav.ejs'); -%>
 
 <body id="body">
     <!-- <div class="container">
@@ -27,7 +28,7 @@
         </div>
     </div> -->
     <div class="container rest">
-        <h2>Step 2: Click On The Restaurant of Your Choice</h2>
+        <h2 style="color:white;">Step 2: Click On The Restaurant of Your Choice</h2>
         <br>
         <form name="form2" action="/movie-preferences/" method="POST">
         <%
@@ -70,12 +71,3 @@
     </script>
 
 <%- include('../partials/footer.ejs'); -%>
-<style>
-  .vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-</style>
