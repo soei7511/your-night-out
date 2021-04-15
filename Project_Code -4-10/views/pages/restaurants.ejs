@@ -13,8 +13,8 @@
   }
 </style>
 <body id="body">
-
 <%- include('../partials/nav.ejs'); -%>
+<div id="background">
     <div class="container">
         <br>
         <br>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="container rest" id="background">
+    <div class="container rest">
         <h2>Step 2: Click On The Restaurant of Your Choice</h2>
         <br>
         <form name="form2" action="/movie-preferences/" method="POST">
@@ -58,6 +58,7 @@
         <input type="submit" value="Continue to Movie Selection" style="width:100%; text-align:center;">
         <br>
         </form>
+    </div>
     </div>
 
     <script>
