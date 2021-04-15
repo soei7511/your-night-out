@@ -13,7 +13,7 @@
         body {
          width: 100vw;
          height: 100vh;
-         display: flex; 
+         display: flex;
          align-items: center;
          justify-content: center;
         }
@@ -21,7 +21,7 @@
         .background {
             width: 100vw;
          height: 100vh;
-         display: flex; 
+         display: flex;
          align-items: center;
          justify-content: center;
             background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjvdiwNl95dOyDDAJ_WdxauEjdjIfHA1ZcVg&usqp=CAU");
@@ -63,8 +63,8 @@
         }
 
         .card-img {
-            height:100%;
-            width:100%;
+            height:175px;
+            width:200px;
             background-size: cover;
         }
 
@@ -98,9 +98,16 @@
         }
 
         input[type="submit"] {width: 100%;}
-        input[type="submit"]:hover { 
+        input[type="submit"]:hover {
             background-color: #4CAF50;
             color: white;
+        }
+
+        input.checkbox {
+          left: 50%;
+          top: 50px;
+            width: 40px;
+            height: 40px;
         }
 
         /* input[type="checkbox"]:checked {
@@ -127,7 +134,7 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
-                    <form action="/movies/" method="POST">   
+                    <form action="/movies/" method="POST">
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -136,30 +143,30 @@
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBEZ5uPg8T1en58VNdHK08U-k6kDyM1igmVg&usqp=CAU" alt="Action card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Action</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="action">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="action">
-                                        </div> 
-                                    </div>   
-                                </div>    
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqbY4nnWTv7Tx4ds82h45nHSggwMKXTsjLKg&usqp=CAU" alt="Horror card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Horror</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="horror">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="horror">
-                                        </div>  
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIXrMx7YAXzEUlZT71Y4b4OpCkUA4X2OIsbQ&usqp=CAU" alt="Drama card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Drama</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="drama">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="drama">
-                                        </div>  
+                                        </div>
                                     </div>
-                                </div>        
-                            </div>      
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <div class="card-group">
@@ -167,30 +174,30 @@
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzvnSgFiB4EJmTBuTUGr5hoNRgt3pNRkts9A&usqp=CAU" alt="Romance card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Romance</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="romance">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="romance">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE8MAQhi-Ag2PumCxyfpMun4-2ta0j-4pbRQ&usqp=CAU" alt="Comedy card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Comedy</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="comedy">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="comedy">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2020/06/back-to-the-future-2-social-feature.jpg" alt="Scifi card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Scifi</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="scifi">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="scifi">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>      
-                            </div>      
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <div class="card-group">
@@ -198,30 +205,30 @@
                                     <img class="card-img" src="https://static01.nyt.com/images/2020/03/31/arts/television/31xp-tigerking/31xp-tigerking-mediumSquareAt3X.jpg" alt="Documentaries card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Documentaries</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="documentaries">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="documentaries">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/2019/07/gettyimages-93262182.jpg?offset-x=0&offset-y=0" alt="Musicals card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Musicals</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="musicals">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="musicals">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>    
+                                </div>
                                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX9mB3lx8EQro17ao2mIYSPnA8DqgwIRUrEA&usqp=CAU" alt="Crime card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Crime</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="crime">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="crime">
-                                        </div> 
+                                        </div>
                                     </div>
-                                </div>      
-                            </div>      
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <div class="card-group">
@@ -229,16 +236,16 @@
                                     <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsImkvZC7ifeMHhwrTfcE0bTDvTXEh7R-9rQ&usqp=CAU" alt="Romcom card image">
                                     <div class="card-img-overlay">
                                         <h5 class="card-title">Romcom</h5>
+                                        <input class="checkbox" type="checkbox" name="data" value="romcom">
                                         <div class="card-footer text-center">
-                                            <input type="checkbox" name="data" value="romcom">
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>      
-                        </div>        
+                            </div>
+                        </div>
                     </div>
                     <input type="submit" class="Submit">
-                </form>    
+                </form>
                     <!-- Left and right controls -->
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
@@ -249,7 +256,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-            </div>  
-        </div>      
+            </div>
+        </div>
     </body>
     </html>
