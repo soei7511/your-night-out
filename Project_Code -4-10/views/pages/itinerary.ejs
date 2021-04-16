@@ -1,4 +1,5 @@
 <%- include('../partials/header.ejs'); -%>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <body id="body">
 <%- include('../partials/nav.ejs'); -%>
 	<div class="container">
@@ -16,17 +17,81 @@
 					<p id="name">Your restaurant:
 						<%- restaurant_name %>
 					</p>
-					<p id="name">Your movie:
-						<%- movie_name %>
+					<p id="name">Your Theater: Century Boulder
+						<!-- <%- movie_name %> -->
 					</p>
-				</div>
-
-				<div class="map-box">
-					MAP GOES HERE
 				</div>
 				</div>
 			</div>
 		</div>
+
+		<div id="map" class="map"></div>
+		<div id="right-panel" class="right-panel">
+			<p>Total Distance: <span id="total"></span></p>
+		</div>
+
+		<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaEzhc556QFa4Nj3At445M_IoYxw083II&callback=initMap&libraries=&v=weekly"
+			async
+		></script>
+		
+		<script>
+			function initMap() {
+				const map = new google.maps.Map(document.getElementById("map"), {
+					zoom: 4,
+					center: { lat: -24.345, lng: 134.46 },
+				});
+				const directionsService = new google.maps.DirectionsService();
+				const directionsRenderer = new google.maps.DirectionsRenderer({
+					draggable: true,
+					map,
+					panel: document.getElementById("right-panel"),
+				});
+				directionsRenderer.addListener("directions_changed", () => {
+					computeTotalDistance(directionsRenderer.getDirections());
+				});
+				displayRoute(
+					"2630 Baseline Rd, Boulder",
+					"1700 29th Street, Boulder, CO",
+					directionsService,
+					directionsRenderer
+				);
+			}
+
+			function displayRoute(origin, destination, service, display) {
+				service.route(
+					{
+						origin: origin,
+						destination: destination,
+						travelMode: google.maps.TravelMode.DRIVING,
+						avoidTolls: true,
+					},
+					(result, status) => {
+					if (status === "OK" && result) {
+						display.setDirections(result);
+					} else {
+						alert("Could not display directions due to: " + status);
+					}
+					}
+				);
+			}
+
+			function computeTotalDistance(result) {
+				let total = 0;
+				const myroute = result.routes[0];
+
+				if (!myroute) {
+					return;
+				}
+
+				for (let i = 0; i < myroute.legs.length; i++) {
+					total += myroute.legs[i].distance.value;
+				}
+				total = total / 1000;
+				document.getElementById("total").innerHTML = total + " km";
+			}
+		</script>
 	</div>
 
 <%- include('../partials/footer.ejs'); -%>
