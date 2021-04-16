@@ -14,7 +14,7 @@
                 <form action="/itinerary/" method="POST">
 
                     <%
-                        let cards = '<div class="card-columns">';
+                        let cards = '<div class="card-col-sm-6">';
                         <!-- Iterate the items object & update the cards variable -->
                         data.forEach(function(data){
                             cards += '<input type="radio" name="rest_id" value="' + data.film_id + '"><div class="card border-dark mb-3" style="width: 14rem;"><div class="card-header">' + data.film_name + '</div><div class="card-body"><strong>Genre:</strong><p>' + data.film_genre + '</p><strong>Showtimes:</strong><p>' + data.film_showtimes + '</p></div>';
