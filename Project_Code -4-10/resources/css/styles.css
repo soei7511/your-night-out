@@ -3,15 +3,6 @@
     padding: 0;
 }
 
-.background {
-    width: 100vw;
-    height: 100vh;
-    background-image: url("https://t3.ftcdn.net/jpg/02/52/12/40/360_F_252124067_aCtp9ZD934RboKmjJzkXiwYDL7XkNjpn.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-}
-
 .fa.fa-star {
     color: grey;
 }
@@ -42,3 +33,10 @@
 .card.selected {
     border: 1.5px solid rgb(0,123,255);
 }
+input[type="submit"] { width: 100%;}
+input[type="submit"]:hover { 
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
