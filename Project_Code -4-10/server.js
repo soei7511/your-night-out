@@ -146,8 +146,8 @@ app.get('/login', checkAuthenticated, (req, res) => {
     res.render("pages/login");
 });
 
-// app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
-app.get('/food-preferences', (req, res) => {
+app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
+// app.get('/food-preferences', (req, res) => {
   // fix from: https://lostechies.com/derickbailey/2013/12/04/getting-the-real-client-ip-address-on-a-heroku-hosted-nodejs-app/
   var ipAddr = req.headers["x-forwarded-for"]; // if used on heroku, this grabs users ip from heroku ip forwarding
   if (ipAddr){
@@ -159,7 +159,7 @@ app.get('/food-preferences', (req, res) => {
       my_title: 'Cuisine Preferences',
       error: false
   });
-    // user_email = req.user.email;
+    user_email = req.user.email;
 });
 
 app.get('/logout', (req, res) => {
@@ -433,13 +433,13 @@ app.post('/movies', (req, res) => {
       keysArr.push(key);
   }
   if ((keysArr.length <= 3 && keysArr.length > 0) || !error){
-    //   pool.query(
-    //           `UPDATE user_info
-    //         SET movie_preferences = $1
-    //         WHERE email = $2`, [req.body.data, user_email], (err, results) => {
-    //               if (err) {}
-    //           }
-    //       );
+      pool.query(
+              `UPDATE user_info
+            SET movie_preferences = $1
+            WHERE email = $2`, [req.body.data, user_email], (err, results) => {
+                  if (err) {}
+              }
+          );
 
       var movies = [];
       
