@@ -576,7 +576,7 @@ app.post('/itinerary', (req, res) => {
         let hoursArr = data.opening_hours.weekday_text;
         day = new Date();
         let hours;
-        if (hoursArr){
+        if (hoursArr.length){
             hours = hoursArr[day.getDate() - 1];
         } else {
             hours = "No data available";
