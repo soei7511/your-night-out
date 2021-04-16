@@ -450,6 +450,7 @@ app.post('/movies', (req, res) => {
               cinema_name = response.data.cinemas[0].cinema_name;
               theater_coords_lat = response.data.cinemas[0].lat;
               theater_coords_lng = response.data.cinemas[0].lng;
+              movie_name = cinema_name;
 
               console.log("Lat: " + theater_coords_lat);
               console.log("Lng: " + theater_coords_lng);
@@ -479,7 +480,6 @@ app.post('/movies', (req, res) => {
                           
                       for (var i = 0; i < films_showing_arr_length; i++) {
                           var film_name = response2.data.films[i].film_name;
-                          movie_name = film_name;
                           var film_id = response2.data.films[i].film_id;
       
                           var film_showtimes_arr = [];
