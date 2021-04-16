@@ -78,10 +78,23 @@ function json(url) {
   return fetch(url).then(res => res.json());
 }
 
+// Google api related variables
 const apiKey = '08d40370c7de416b79aaeab3b1eec4d88a555806cbae7552e56ab497';
 const googKey = 'AIzaSyBUeImM3xqVjnjbPTrkx6qeUmpaqcid8Ws';
 let finalPlaceId = ''; // This stores the placeId the user selects on restaurants page, for further use on movies and itinerary
 let userIp = '';
+let restaurant_name = '';
+
+// MovieGlu api related variables
+  var movieGlu_authorization = "Basic TlJITF9YWDpLZTNhRHNubkFuc3E=";
+  var movieGlu_x_api_key = "XNsRQ3tR2f2175UJg7CpKalmFhnrprDq8bBoDqPZ";
+  var movieGlu_device_datetime = "2021-04-15T15:55:11.890Z";
+  var movieGlu_device_date = "2021-04-15";
+  var cinema_id;
+  var cinema_name;
+  var movie_name;
+  var theater_coords_lat;
+  var theater_coords_lng;
 
 //API call to get users IP, if hosted locally, requires node-fetch module
 json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
@@ -125,7 +138,7 @@ app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
       my_title: 'Cuisine Preferences',
       error: false
   });
-  user_email = req.user.email;
+    user_email = req.user.email;
 });
 
 app.get('/logout', (req, res) => {
@@ -237,19 +250,18 @@ app.post('/restaurants', function(req, res){
               cuisineArr[0] = data;
           } else {
               for (let i = 0; i < keysArr.length; i++){
-                  cuisineArr[i] = keysArr[i];
-                  //console.log("cuis: " + cuisineArr[i]);
-                pool.query(
-                        `UPDATE user_info
-                         SET restaurant_preferences = $1
-                         WHERE email = $2`, [cuisineArr, user_email], (err, results) => {
-                              if (err) {}
-                         }
-                     );
+                  cuisineArr[i] = keysArr[i];			
               }
+              pool.query(
+                `UPDATE user_info
+                 SET restaurant_preferences = $1
+                 WHERE email = $2`, [cuisineArr, user_email], (err, results) => {
+                      if (err) {}
+                 }
+             );
           }
           axios({ // This API returns restaurant data from google
-              url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=restaurant&radius=2500&keyword=${cuisineArr[0]}|${cuisineArr[1]}|${cuisineArr[2]}&location=${items.data.latitude},${items.data.longitude}&key=${googKey}`,
+              url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=restaurant&radius=8000&keyword=${cuisineArr[0]}|${cuisineArr[1]}|${cuisineArr[2]}&location=${items.data.latitude},${items.data.longitude}&key=${googKey}`,
               method: 'GET',
           })
           .then(locations => {
@@ -264,7 +276,7 @@ app.post('/restaurants', function(req, res){
                   let place_id;
                   place_id = locationsArr[0].place_id;
                   axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                       method: 'GET',
                   })
                   .then(place1 => {
@@ -273,7 +285,7 @@ app.post('/restaurants', function(req, res){
                       if (size){
                           place_id = locationsArr[1].place_id;
                           axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                               method: 'GET',
                           })
                           .then(place2 => {
@@ -282,7 +294,7 @@ app.post('/restaurants', function(req, res){
                               if (size){
                                   place_id = locationsArr[2].place_id;
                                   axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                                       method: 'GET',
                                   })
                                   .then(place3 => {
@@ -291,7 +303,7 @@ app.post('/restaurants', function(req, res){
                                       if (size){
                                           place_id = locationsArr[3].place_id;
                                           axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                                               method: 'GET',
                                           })
                                           .then(place4 => {
@@ -300,7 +312,7 @@ app.post('/restaurants', function(req, res){
                                               if (size){
                                                   place_id = locationsArr[4].place_id;
                                                   axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                                                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                                                      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                                                       method: 'GET',
                                                   })
                                                   .then(place5 => {
@@ -309,7 +321,7 @@ app.post('/restaurants', function(req, res){
                                                       if (size){
                                                           place_id = locationsArr[5].place_id;
                                                           axios({ // This API returns specfic data about each of the top rated 6 restaurants
-                                                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+                                                              url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=place_id,formatted_address,formatted_phone_number,name,website,opening_hours,rating,price_level&key=${googKey}`,
                                                               method: 'GET',
                                                           })
                                                           .then(place6 => {
@@ -400,12 +412,147 @@ app.post('/movies', (req, res) => {
       keysArr.push(key);
   }
   if ((keysArr.length <= 3 && keysArr.length > 0) || !error){
-      res.render('pages/movies', {
-          my_title: "Movies",
-          place_id: finalPlaceId,
-          data: data,
-          error: false,
-        })
+      pool.query(
+              `UPDATE user_info
+            SET movie_preferences = $1
+            WHERE email = $2`, [req.body.data, user_email], (err, results) => {
+                  if (err) {}
+              }
+          );
+
+      var movies = [];
+      
+      var cinemas_nearby_settings = {
+          "url": "https://api-gate2.movieglu.com/cinemasNearby/?n=1",
+          "method": "GET",
+          "timeout": 0,
+          "headers": {
+              "api-version": "v200",
+              "Authorization": movieGlu_authorization,
+              "client": "NRHL",
+              "x-api-key": movieGlu_x_api_key,
+              "device-datetime": movieGlu_device_datetime,
+              "territory": "XX",
+              "geolocation": "-22.0;14.0",
+          },
+      };
+      
+      axios(cinemas_nearby_settings)
+          .then(function(response) {
+              cinema_id = response.data.cinemas[0].cinema_id;
+              cinema_name = response.data.cinemas[0].cinema_name;
+              theater_coords_lat = response.data.cinemas[0].lat;
+              theater_coords_lng = response.data.cinemas[0].lng;
+
+              console.log("Lat: " + theater_coords_lat);
+              console.log("Lng: " + theater_coords_lng);
+      
+              console.log("Cinema Name: " + cinema_name);
+              console.log("Cinema ID: " + cinema_id);
+      
+              console.log("\n");
+      
+              var cinema_show_times_settings = {
+                  "url": `https://api-gate2.movieglu.com/cinemaShowTimes/?cinema_id=${cinema_id}&date=${movieGlu_device_date}`,
+                  "method": "GET",
+                  "timeout": 0,
+                  "headers": {
+                      "api-version": "v200",
+                      "Authorization": movieGlu_authorization,
+                      "client": "NRHL",
+                      "x-api-key": movieGlu_x_api_key,
+                      "device-datetime": movieGlu_device_datetime,
+                      "territory": "XX",
+                  },
+              };
+      
+              axios(cinema_show_times_settings)
+                  .then(function(response2) {
+                      const films_showing_arr_length = response2.data.films.length;
+                          
+                      for (var i = 0; i < films_showing_arr_length; i++) {
+                          var film_name = response2.data.films[i].film_name;
+                          movie_name = film_name;
+                          var film_id = response2.data.films[i].film_id;
+      
+                          var film_showtimes_arr = [];
+                          var film_showtimes = response2.data.films[i].showings.Standard.times;
+      
+                          for (var j = 0; j < film_showtimes.length; j++) {
+                              film_showtimes_arr.push(film_showtimes[j].start_time);
+                          }
+      
+                          var movie_info = {
+                              film_id: film_id,
+                              film_name: film_name,
+                              film_showtimes: film_showtimes_arr,
+                              film_genre: "blank"
+                          };
+      
+                          movies.push(movie_info);
+      
+                          var film_detail_settings = {
+                              "url": `https://api-gate2.movieglu.com/filmDetails/?film_id=${film_id}&size_category=Small`,
+                              "method": "GET",
+                              "timeout": 0,
+                              "headers": {
+                                  "api-version": "v200",
+                                  "Authorization": movieGlu_authorization,
+                                  "client": "NRHL",
+                                  "x-api-key": movieGlu_x_api_key,
+                                  "device-datetime": movieGlu_device_datetime,
+                                  "territory": "XX",
+                              },
+                          };
+      
+                          axios(film_detail_settings)
+                              .then(function(response3) {
+                                  for (var i=0; i<movies.length; i++) {
+                                      if(movies[i].film_id == response3.data.film_id){
+                                          movies[i].film_genre = response3.data.genres[0].genre_name;
+                                      }
+                                  }
+                              })
+                              .catch(error => {
+                                  console.log(error);
+                                  res.render('pages/movie-preferences',{
+                                      my_title: 'Movie Preferences',
+                                      place_id: finalPlaceId,
+                                      error: true,
+                                      message: "Error: API call error. Please try again later."
+                                  })
+                              });
+                      }
+      
+                      console.log("****** rendering now ******")
+      
+                      // Render Page
+                      res.render('pages/movies', {
+                          my_title: "Movies",
+                          data: movies,
+                          cinema_name: cinema_name,
+                          place_id: finalPlaceId,
+                          error: false,
+                      })
+                  })
+                  .catch(error => {
+                      console.log(error);
+                      res.render('pages/movie-preferences',{
+                          my_title: 'Movie Preferences',
+                          place_id: finalPlaceId,
+                          error: true,
+                          message: "Error: API call error. Please try again later."
+                      })
+                  });
+          })
+          .catch(error => {
+            res.render('pages/movie-preferences',{
+                my_title: 'Movie Preferences',
+                place_id: finalPlaceId,
+                error: true,
+                message: "Error: API call error. Please try again later."
+            })
+          });   
   } else { // re-renders page if not # of prefs selected
       res.render('pages/movie-preferences',{
           my_title: 'Movie Preferences',
@@ -417,25 +564,29 @@ app.post('/movies', (req, res) => {
 });
 
 app.post('/itinerary', (req, res) => {
-  console.log(finalPlaceId);
-  axios({ // Grabs place details from the restaurant selected in the restaurants page
-      url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${finalPlaceId}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
-      method: 'GET',
-  })
-  .then(restaurant => {
-      let data = restaurant.data.result;
-      let hoursArr = data.opening_hours.weekday_text;
-      let day = new Date();
-      let hours = hoursArr[day.getDay() - 1];
-      console.log(hoursArr);
-      console.log(hours);
-      res.render('pages/itinerary', {
-          data: data,
-          open_hours: hours,
-          my_title: "Itinerary"
-      });
+    console.log(finalPlaceId);
+    console.log("Lat: " + theater_coords_lat);
+    console.log("Lng: " + theater_coords_lng);
+    axios({ // Grabs place details from the restaurant selected in the restaurants page
+        url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${finalPlaceId}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
+        method: 'GET',
+    })
+    .then(restaurant => {
+        let data = restaurant.data.result;
+        let hoursArr = data.opening_hours.weekday_text;
+        let day = new Date();
+        let hours = hoursArr[day.getDay() - 1];
+        console.log(hoursArr);
+        console.log(hours);
+        res.render('pages/itinerary', {
+            data: data,
+            restaurant_name: restaurant_name,
+            movie_name: movie_name,
+            open_hours: hours,
+            my_title: "Itinerary"
+        });
+    });
   });
-});
 
 
 // app.listen(PORT, () => {
