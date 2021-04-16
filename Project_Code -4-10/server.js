@@ -587,7 +587,7 @@ app.post('/itinerary', (req, res) => {
             data: data,
             restaurant_name: restaurant_name,
             movie_name: movie_name,
-            open_hours: hours,
+            open_hours: "WORK",
             my_title: "Itinerary"
         });
     });
