@@ -86,15 +86,22 @@ let userIp = '';
 let restaurant_name = '';
 
 // MovieGlu api related variables
-  var movieGlu_authorization = "Basic TlJITF9YWDpLZTNhRHNubkFuc3E=";
-  var movieGlu_x_api_key = "XNsRQ3tR2f2175UJg7CpKalmFhnrprDq8bBoDqPZ";
-  var movieGlu_device_datetime = "2021-04-15T15:55:11.890Z";
-  var movieGlu_device_date = "2021-04-15";
-  var cinema_id;
-  var cinema_name;
-  var movie_name;
-  var theater_coords_lat;
-  var theater_coords_lng;
+var movieGlu_authorization = "Basic TlJITF9YWDpLZTNhRHNubkFuc3E=";
+var movieGlu_x_api_key = "XNsRQ3tR2f2175UJg7CpKalmFhnrprDq8bBoDqPZ";
+
+  let date = new Date();
+  let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+  let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date);
+  let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+  console.log(`${ye}-${mo}-${da}`);
+
+var movieGlu_device_datetime = `${ye}-${mo}-${da}` + "T18:00:29.544Z";
+var movieGlu_device_date = `${ye}-${mo}-${da}`;
+var cinema_id;
+var cinema_name;
+var movie_name;
+var theater_coords_lat;
+var theater_coords_lng;
 
 //API call to get users IP, if hosted locally, requires node-fetch module
 json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
