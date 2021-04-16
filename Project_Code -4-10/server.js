@@ -578,6 +578,7 @@ app.post('/itinerary', (req, res) => {
         let hours;
         if (hoursArr.length){
             hours = hoursArr[day.getDate() - 1];
+            hours = "how is this undefined???!?!?!";
         } else {
             hours = "No data available";
         }
