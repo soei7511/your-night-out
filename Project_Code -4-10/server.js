@@ -86,8 +86,18 @@ let userIp = '';
 let restaurant_name = '';
 
 // MovieGlu api related variables
+
+// Production Values
+// var movieGlu_authorization = "Basic TlJITDpicjVKZ0xwY3p3TzY=";
+// var movieGlu_x_api_key = "i8LDBlpqi1asf6A0ff0pp6zeq8bnEqCK6vMMNj9S";
+// var movieGlu_territory = "US";
+// var movieGlu_geolocation = "40.0150;-105.2705";
+
+// Test Values
 var movieGlu_authorization = "Basic TlJITF9YWDpLZTNhRHNubkFuc3E=";
 var movieGlu_x_api_key = "XNsRQ3tR2f2175UJg7CpKalmFhnrprDq8bBoDqPZ";
+var movieGlu_territory = "XX";
+var movieGlu_geolocation = "-22.0;14.0";
 
   let date = new Date();
   let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
@@ -102,6 +112,9 @@ var cinema_name;
 var movie_name;
 var theater_coords_lat;
 var theater_coords_lng;
+var theater_address;
+var theater_city;
+var theater_state;
 
 //API call to get users IP, if hosted locally, requires node-fetch module
 json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
@@ -133,7 +146,8 @@ app.get('/login', checkAuthenticated, (req, res) => {
     res.render("pages/login");
 });
 
-app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
+// app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
+app.get('/food-preferences', (req, res) => {
   // fix from: https://lostechies.com/derickbailey/2013/12/04/getting-the-real-client-ip-address-on-a-heroku-hosted-nodejs-app/
   var ipAddr = req.headers["x-forwarded-for"]; // if used on heroku, this grabs users ip from heroku ip forwarding
   if (ipAddr){
@@ -145,7 +159,7 @@ app.get('/food-preferences', checkNotAuthenticated, (req, res) => {
       my_title: 'Cuisine Preferences',
       error: false
   });
-    user_email = req.user.email;
+    // user_email = req.user.email;
 });
 
 app.get('/logout', (req, res) => {
@@ -419,13 +433,13 @@ app.post('/movies', (req, res) => {
       keysArr.push(key);
   }
   if ((keysArr.length <= 3 && keysArr.length > 0) || !error){
-      pool.query(
-              `UPDATE user_info
-            SET movie_preferences = $1
-            WHERE email = $2`, [req.body.data, user_email], (err, results) => {
-                  if (err) {}
-              }
-          );
+    //   pool.query(
+    //           `UPDATE user_info
+    //         SET movie_preferences = $1
+    //         WHERE email = $2`, [req.body.data, user_email], (err, results) => {
+    //               if (err) {}
+    //           }
+    //       );
 
       var movies = [];
       
@@ -439,11 +453,12 @@ app.post('/movies', (req, res) => {
               "client": "NRHL",
               "x-api-key": movieGlu_x_api_key,
               "device-datetime": movieGlu_device_datetime,
-              "territory": "XX",
-              "geolocation": "-22.0;14.0",
+              "territory": movieGlu_territory,
+              "geolocation": movieGlu_geolocation,
           },
       };
       
+      console.log("1");
       axios(cinemas_nearby_settings)
           .then(function(response) {
               cinema_id = response.data.cinemas[0].cinema_id;
@@ -451,6 +466,10 @@ app.post('/movies', (req, res) => {
               theater_coords_lat = response.data.cinemas[0].lat;
               theater_coords_lng = response.data.cinemas[0].lng;
               movie_name = cinema_name;
+
+              theater_address = response.data.cinemas[0].address;
+            //   theater_city = response.data.cinemas[0].county;
+            //   theater_state = response.data.cinemas[0].state;
 
               console.log("Lat: " + theater_coords_lat);
               console.log("Lng: " + theater_coords_lng);
@@ -470,10 +489,11 @@ app.post('/movies', (req, res) => {
                       "client": "NRHL",
                       "x-api-key": movieGlu_x_api_key,
                       "device-datetime": movieGlu_device_datetime,
-                      "territory": "XX",
+                      "territory": movieGlu_territory,
                   },
               };
       
+              console.log("2");
               axios(cinema_show_times_settings)
                   .then(function(response2) {
                       const films_showing_arr_length = response2.data.films.length;
@@ -508,10 +528,11 @@ app.post('/movies', (req, res) => {
                                   "client": "NRHL",
                                   "x-api-key": movieGlu_x_api_key,
                                   "device-datetime": movieGlu_device_datetime,
-                                  "territory": "XX",
+                                  "territory": movieGlu_territory,
                               },
                           };
       
+                          console.log("3");
                           axios(film_detail_settings)
                               .then(function(response3) {
                                   for (var i=0; i<movies.length; i++) {
@@ -553,6 +574,7 @@ app.post('/movies', (req, res) => {
                   });
           })
           .catch(error => {
+              console.log(error);
             res.render('pages/movie-preferences',{
                 my_title: 'Movie Preferences',
                 place_id: finalPlaceId,
@@ -572,8 +594,10 @@ app.post('/movies', (req, res) => {
 
 app.post('/itinerary', (req, res) => {
     console.log(finalPlaceId);
-    console.log("Lat: " + theater_coords_lat);
-    console.log("Lng: " + theater_coords_lng);
+    console.log("Theater Address: " + theater_address);
+
+    var theater_coords = `${theater_coords_lat},${theater_coords_lng}`;
+
     axios({ // Grabs place details from the restaurant selected in the restaurants page
         url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${finalPlaceId}&fields=place_id,formatted_address,formatted_phone_number,geometry,url,name,website,opening_hours,rating&key=${googKey}`,
         method: 'GET',
@@ -589,11 +613,18 @@ app.post('/itinerary', (req, res) => {
             hours = "No data available";
         }
         restaurant_name = data.name;
+        
+        let restaurant_address = data.formatted_address;
+
+        console.log("Rest address: " + restaurant_address);
+
         res.render('pages/itinerary', {
             data: data,
             restaurant_name: restaurant_name,
             movie_name: movie_name,
             open_hours: hours,
+            restaurant_coords: restaurant_address,
+            theater_coords: theater_address,
             my_title: "Itinerary"
         });
     });
