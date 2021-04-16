@@ -576,6 +576,7 @@ app.post('/itinerary', (req, res) => {
         let hoursArr = data.opening_hours.weekday_text;
         let day = new Date();
         let hours = hoursArr[day.getDay() - 1];
+        restaurant_name = data.name;
         console.log(hoursArr);
         console.log(hours);
         res.render('pages/itinerary', {
