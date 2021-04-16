@@ -1,5 +1,7 @@
 <%- include('../partials/header.ejs'); -%>
 <body id="body">
+  <%- include('../partials/nav.ejs'); -%>
+
     <br>
     <br>
     <div class="background">
@@ -11,7 +13,7 @@
                 </h2>
                 <br>
                 <form action="/itinerary/" method="POST">
-    
+
                     <%
                         let cards = '<div class="card-columns">';
                         <!-- Iterate the items object & update the cards variable -->
@@ -21,7 +23,7 @@
                         cards += '</div>';
                     %>
                     <%- cards %>
-                    
+
                     <input type="submit" value="Continue to Itinerary">
                 </form>
             </div>
@@ -30,7 +32,7 @@
             <p><%- place_id %></p>
         </div>
     </div>
-    <style>
+    <!-- <style>
         .background {
             width: 100vw;
          height: 100vh;
@@ -42,5 +44,5 @@
             background-size: cover;
             overflow: hidden;
         }
-      </style>
+      </style> -->
 <%- include('../partials/footer.ejs'); -%>
