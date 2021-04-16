@@ -1,4 +1,4 @@
-<!-- <%- include('../partials/header.ejs'); -%>
+<%- include('../partials/header.ejs'); -%>
 <body id="body">
   <%- include('../partials/nav.ejs'); -%>
 
@@ -11,7 +11,6 @@
                     <%- cinema_name%>
                 </h2>
                 <br>
-                <div class="row col-12"
                 <form action="/itinerary/" method="POST">
 
                     <%
@@ -22,14 +21,13 @@
                         cards += '</div>';
                     %>
                     <%- cards %>
-</div>
                     <input type="submit" value="Continue to Itinerary">
                 </form>
             </div>
         </div>
    
-<%- include('../partials/footer.ejs'); -%> -->
-
+<%- include('../partials/footer.ejs'); -%>
+<!--
 <%- include('../partials/header.ejs'); -%>
 <body id="body">
 
@@ -76,4 +74,4 @@
         $(this).parent().parent().find('input:first').val(val);
 });
     </script>
-<%- include('../partials/footer.ejs'); -%>
+<%- include('../partials/footer.ejs'); -%> -->
