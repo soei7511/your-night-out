@@ -576,9 +576,8 @@ app.post('/itinerary', (req, res) => {
         let hoursArr = data.opening_hours.weekday_text;
         day = new Date();
         let hours;
-        if (hoursArr.length){
+        if (hoursArr.length > 0){
             hours = hoursArr[day.getDate() - 1];
-            hours = "how is this undefined???!?!?!";
         } else {
             hours = "No data available";
         }
@@ -587,7 +586,7 @@ app.post('/itinerary', (req, res) => {
             data: data,
             restaurant_name: restaurant_name,
             movie_name: movie_name,
-            open_hours: "WORK",
+            open_hours: hours,
             my_title: "Itinerary"
         });
     });
