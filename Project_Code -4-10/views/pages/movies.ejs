@@ -4,8 +4,8 @@
 
     <br>
     <br>
-        <div id="container">
-            <div id="choose">
+        <!-- <div id="container"> -->
+            <div class="container rest" id="choose">
                 <h1> Movies</h1>
                 <h2>
                     <%- cinema_name%>
@@ -14,22 +14,32 @@
                 <form action="/itinerary/" method="POST">
 
                     <%
-                        let cards = '<div class="card-col-sm-6">';
+                        let cards = '<div class="card-columns">';
                         <!-- Iterate the items object & update the cards variable -->
                         data.forEach(function(data){
-                            cards += '<input type="radio" name="rest_id" value="' + data.film_id + '"><div class="card border-dark mb-3" style="width: 14rem;"><div class="card-header">' + data.film_name + '</div><div class="card-body"><strong>Genre:</strong><p>' + data.film_genre + '</p><strong>Showtimes:</strong><p>' + data.film_showtimes + '</p></div>';
+                            cards += '<div class="card" style="width: 14rem;" data-value="' + data.film_id + '"><div class="card-header">' + data.film_name + '</div><div class="card-body"><strong>Genre:</strong><p>' + data.film_genre + '</p><strong>Showtimes:</strong><p>' + data.film_showtimes + '</p></div>';
                         });
                         cards += '</div>';
                     %>
                     <%- cards %>
-
+                    <input type="text" style="visibility: hidden" name="rest_id" required/>
                     <input type="submit" value="Continue to Itinerary">
+  </div>
                 </form>
-            </div>
+
             <!-- <p>DATA HERE:</p>
             <p><%- data %></p>
             <p><%- place_id %></p> -->
-        </div>
+        <!-- </div> -->
+        <script>
+            // from https://stackoverflow.com/questions/32935435/use-div-as-radio-button
+            $('.container .card-columns .card').click(function(){
+            $(this).parent().find('.card').removeClass('selected');
+            $(this).addClass('selected');
+            var val = $(this).attr('data-value');
+            $(this).parent().parent().find('input:first').val(val);
+    });
+        </script>
     <!-- <style>
         .background {
             width: 100vw;
