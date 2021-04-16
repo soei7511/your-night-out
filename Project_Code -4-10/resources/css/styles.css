@@ -33,10 +33,42 @@
 .card.selected {
     border: 1.5px solid rgb(0,123,255);
 }
-input[type="submit"] { width: 100%;}
-input[type="submit"]:hover { 
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
 
+
+/* Embedded Map CSS */
+#right-panel {
+    font-family: "Roboto", "sans-serif";
+    line-height: 30px;
+    padding-left: 10px;
+  }
+  
+  #right-panel select,
+  #right-panel input {
+    font-size: 15px;
+  }
+  
+  #right-panel select {
+    width: 100%;
+  }
+  
+  #right-panel i {
+    font-size: 12px;
+  }
+  
+  #map {
+    height: 100%;
+    float: left;
+    width: 63%;
+    height: 400px;
+  }
+  
+  #right-panel {
+    float: right;
+    width: 34%;
+    height: 400px;
+  }
+  
+  .panel {
+    height: 400px;
+    overflow: auto;
+  }
