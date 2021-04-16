@@ -577,7 +577,7 @@ app.post('/itinerary', (req, res) => {
         day = new Date();
         let hours;
         if (hoursArr.length > 0){
-            hours = hoursArr[day.getDate() - 1];
+            hours = hoursArr[day.getDate() % 6];
         } else {
             hours = "No data available";
         }
