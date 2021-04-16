@@ -579,7 +579,7 @@ app.post('/itinerary', (req, res) => {
         if (hoursArr){
             hours = hoursArr[day.getDate() - 1];
         } else {
-            hours = NULL;
+            hours = "No data available";
         }
         restaurant_name = data.name;
         res.render('pages/itinerary', {
